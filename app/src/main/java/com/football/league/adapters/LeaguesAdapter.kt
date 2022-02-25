@@ -11,7 +11,6 @@ import com.football.league.classes.GlobalFunctions
 import com.football.league.databinding.ItemLeagueBinding
 
 
-
 class LeaguesAdapter(
     private val context: Context,
     private val list: List<Competition>,
@@ -27,7 +26,7 @@ class LeaguesAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if(tag.equals(Constants.FAVORITE_FRAGMENT))
+        if (tag.equals(Constants.FAVORITE_FRAGMENT))
             holder.binding.favorite.setImageResource(R.drawable.star_sel)
 
         GlobalFunctions.setImage(
@@ -78,11 +77,17 @@ class LeaguesAdapter(
         }
     }
 
-
     interface OnItemClickListener {
-        fun leagueClick(position: Int)
 
+    }
+
+    interface OnLeagueClickListener : OnItemClickListener {
+        fun leagueClick(position: Int)
+    }
+
+    interface OnAllClickListener : OnItemClickListener {
         fun favoriteClick(position: Int, holder: MyViewHolder)
+        fun leagueClick(position: Int)
     }
 
 

@@ -97,7 +97,7 @@ class LeaguesFragment : Fragment() {
             LeaguesAdapter(
                 requireActivity(),
                 list,null,
-                object : LeaguesAdapter.OnItemClickListener {
+                object : LeaguesAdapter.OnAllClickListener {
                     override fun leagueClick(position: Int) {
                         Navigator.loadFragment(
                             activity,
