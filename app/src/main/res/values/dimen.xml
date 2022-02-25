@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="start">12dp</dimen>
+    <dimen name="end">12dp</dimen>
+    <dimen name="carditem_league_textview_">12dp</dimen>
+    <dimen name="bottom">12dp</dimen>
+
+</resources>

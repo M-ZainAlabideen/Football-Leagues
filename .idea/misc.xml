@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/drawable-xxhdpi/wifi_of.xml" value="0.2265" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/activity_main3.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_favorite_teams.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_league_details.xml" value="0.2" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_leagues.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_notifications.xml" value="0.11302083333333333" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_team_details.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/fragment_teams.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/item_league.xml" value="0.253125" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/item_player.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/item_team.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/EasyCash/InterviewTask/FootballLeagueApp/app/src/main/res/menu/main_activity2.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
