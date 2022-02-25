@@ -1,5 +1,7 @@
 package com.football.league.Model.responses
 
+import com.google.gson.annotations.SerializedName
+
 data class GetLeagues(
 
     val competitions: List<Competition>?,
@@ -8,11 +10,12 @@ data class GetLeagues(
 )
 
 data class Competition(
-    val code: String?,
+    val name: String?,
+    @SerializedName("code")
+    val shortName: String?,
     val emblemUrl: String?,
     val id: Int?,
     val lastUpdated: String?,
-    val name: String?,
     val numberOfAvailableSeasons: Int?,
     val plan: String?
 )

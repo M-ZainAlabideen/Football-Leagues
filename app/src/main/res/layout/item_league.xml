@@ -22,7 +22,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/logo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

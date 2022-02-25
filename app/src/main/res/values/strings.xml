@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FootballLeague</string>
+    <string name="app_name">Football Leagues</string>
     <string name="available_seasons">Available Seasons :</string>
     <string name="plan">Plan :</string>
     <string name="favorite">Favorite</string>

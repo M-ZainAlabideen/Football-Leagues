@@ -9,6 +9,6 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(favorite: Favorite)
 
-    @Query("SELECT * FROM favoriteLeagues")
+    @Query("SELECT competition FROM favoriteLeagues")
     fun getAll() : List<Competition>
 }

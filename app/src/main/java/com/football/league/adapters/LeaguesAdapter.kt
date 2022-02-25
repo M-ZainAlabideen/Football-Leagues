@@ -1,26 +1,22 @@
 package com.football.league.adapters
 
 import android.content.Context
-import android.graphics.drawable.PictureDrawable
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.football.league.Model.responses.Competition
-import com.football.league.Model.responses.GetLeagues
 import com.football.league.R
+import com.football.league.classes.Constants
 import com.football.league.classes.GlobalFunctions
 import com.football.league.databinding.ItemLeagueBinding
+
 
 
 class LeaguesAdapter(
     private val context: Context,
     private val list: List<Competition>,
-    private val listener: OnItemClickListener
+    private val tag: String?,
+    private val listener: OnItemClickListener,
 ) : RecyclerView.Adapter<LeaguesAdapter.MyViewHolder>() {
 
     private var binding: ItemLeagueBinding? = null
@@ -31,65 +27,62 @@ class LeaguesAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        if(tag.equals(Constants.FAVORITE_FRAGMENT))
+            holder.binding.favorite.setImageResource(R.drawable.star_sel)
 
         GlobalFunctions.setImage(
             context,
-            "https://tse1.mm.bing.net/th?id=OIP.neTp253amaORNv-lj2e9-AHaE8&pid=Api&P=0&w=244&h=163",
+            list[position]?.emblemUrl,
             holder.binding.logo,
             R.drawable.list_noimg
         )
 
+        holder.binding.longName.text = getName(position)
 
-        //GlobalFunctions.setImage(context,getLeagues?.competitions?.get(position)?.emblemUrl,holder.binding.logo,R.drawable.list_noimg)
-
-
-        var name :String? = list.get(position)?.name
-        if (name?.length!! > 20)
-            name = name.substring(0, 15) + "..."
-        holder.binding.longName.text = name
-        if (list.get(position)?.code != null)
+        if (list[position]?.shortName != null)
             holder.binding.shortName.text =
-                "(" + list.get(position)?.code + ")"
+                "(" + list[position]?.shortName + ")"
         else
             holder.binding.shortName.visibility = ViewGroup.INVISIBLE
 
-        if (list.get(position)?.numberOfAvailableSeasons != null)
+        if (list[position]?.numberOfAvailableSeasons != null)
             holder.binding.availableSeasons.text =
-                context.getString(R.string.available_seasons) + " " + list.get(
-                    position
-                )?.numberOfAvailableSeasons
+                context.getString(R.string.available_seasons) + " " + list[position]?.numberOfAvailableSeasons
         else
             holder.binding.availableSeasons.visibility = ViewGroup.INVISIBLE
 
-        if (list.get(position)?.plan != null)
+        if (list[position]?.plan != null)
             holder.binding.plan.text =
-                context.getString(R.string.plan) + " " + list.get(
-                    position
-                )?.plan
+                context.getString(R.string.plan) + " " + list[position]?.plan
         else
             holder.binding.plan.visibility = ViewGroup.INVISIBLE
 
         itemCLick(holder, position)
     }
 
+    private fun getName(position: Int): String? {
+        var name: String? = list[position]?.name
+        if (name?.length!! > 15)
+            name = name.substring(0, 15) + "..."
+        return name
+    }
+
+
     private fun itemCLick(holder: MyViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             listener.leagueClick(position)
         }
 
-        holder.binding.favorite.setOnClickListener{
-            listener.favoriteClick(position,holder)
+        holder.binding.favorite.setOnClickListener {
+            listener.favoriteClick(position, holder)
         }
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
 
     interface OnItemClickListener {
         fun leagueClick(position: Int)
 
-        fun favoriteClick(position: Int,holder: MyViewHolder)
+        fun favoriteClick(position: Int, holder: MyViewHolder)
     }
 
 
@@ -99,4 +92,16 @@ class LeaguesAdapter(
 
     }
 
+    override fun getItemCount(): Int {
+        return list?.size ?: 0
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

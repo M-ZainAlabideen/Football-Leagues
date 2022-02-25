@@ -1,17 +1,14 @@
 package com.football.league.views.fragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.football.league.Model.responses.Competition
-import com.football.league.Model.responses.GetLeagues
 import com.football.league.R
 import com.football.league.adapters.LeaguesAdapter
 import com.football.league.classes.GlobalFunctions
@@ -23,7 +20,6 @@ import com.football.league.view_model.LeaguesViewModel
 import com.football.league.views.activities.MainActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class LeaguesFragment : Fragment() {
@@ -55,7 +51,6 @@ class LeaguesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initActivity()
-        initVisibility()
         setup()
         initViewModel()
         checkData()
@@ -67,10 +62,6 @@ class LeaguesFragment : Fragment() {
             LeaguesFragment.activity = activity
     }
 
-    //initialize visibility of Views after Fragment Created
-    private fun initVisibility() {
-
-    }
 
     private fun setup() {
         MainActivity.binding!!.bottomAppBar.menu.findItem(R.id.leagues).isChecked = true
@@ -89,11 +80,11 @@ class LeaguesFragment : Fragment() {
 
     private fun leaguesApi() {
         binding?.leagues?.showShimmer()
-        GlobalFunctions.DisableLayout(binding!!.container)
+        GlobalFunctions.disableLayout(binding!!.container)
         viewModel?.leagues()
             ?.observe(requireActivity()) { responseResult ->
                 binding?.leagues?.hideShimmer()
-                GlobalFunctions.EnableLayout(binding!!.container)
+                GlobalFunctions.enableLayout(binding!!.container)
                 if (responseResult?.competitions != null && responseResult.competitions.isNotEmpty()) {
                     list.addAll(responseResult.competitions)
                     setLeagues()
@@ -108,12 +99,12 @@ class LeaguesFragment : Fragment() {
         binding?.leagues?.adapter =
             LeaguesAdapter(
                 requireActivity(),
-                list,
+                list,null,
                 object : LeaguesAdapter.OnItemClickListener {
                     override fun leagueClick(position: Int) {
                         Navigator.loadFragment(
                             activity,
-                            LeagueDetailsFragment.newInstance(activity),
+                            LeagueDetailsFragment.newInstance(activity,list[position]),
                             R.id.fragment_container,
                             true
                         )
@@ -128,20 +119,15 @@ class LeaguesFragment : Fragment() {
 
     fun addToFavorite(position: Int, holder: LeaguesAdapter.MyViewHolder) {
         Observable.fromCallable {
-            var db = AppDatabase.getDatabase(context = activity)
-            var favoriteDao = db?.favoriteDao()
-
-            with(favoriteDao) {
-                this?.insert(
+            AppDatabase.getDatabase(context = activity)?.favoriteDao()?.insert(
                     Favorite(
                         id = list[position]?.id,
                         competition = list[position],
                     )
                 )
-            }
-        }.doOnComplete { holder.binding.favorite.setImageResource(R.drawable.star_sel) }
+        }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe { holder.binding.favorite.setImageResource(R.drawable.star_sel) }
     }
 }

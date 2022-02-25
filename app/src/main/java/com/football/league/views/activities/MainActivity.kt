@@ -1,13 +1,11 @@
 package com.football.league.views.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.football.league.R
-import com.football.league.classes.GlobalFunctions
 import com.football.league.classes.Navigator
 import com.football.league.databinding.ActivityMainBinding
 import com.football.league.views.fragments.FavoriteFragment
@@ -21,9 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view: View = binding!!.getRoot()
+        val view: View = binding!!.root
         setContentView(view)
-        GlobalFunctions.setUpFont()
         setupBottomNavigationView()
     }
 

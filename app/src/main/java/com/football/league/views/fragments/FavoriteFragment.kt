@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.football.league.Model.responses.Competition
 import com.football.league.R
 import com.football.league.adapters.LeaguesAdapter
+import com.football.league.classes.Constants
 import com.football.league.classes.Navigator
 import com.football.league.databinding.FragmentLeaguesBinding
 import com.football.league.room.AppDatabase
@@ -20,7 +21,7 @@ import io.reactivex.schedulers.Schedulers
 
 class FavoriteFragment : Fragment() {
     private var binding: FragmentLeaguesBinding? = null
-    var list: List<Competition> = ArrayList<Competition>()
+    private var list: List<Competition> = ArrayList<Competition>()
 
     companion object {
         var activity: FragmentActivity? = null
@@ -46,7 +47,6 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initActivity()
-        initVisibility()
         setup()
         getAll()
     }
@@ -57,45 +57,38 @@ class FavoriteFragment : Fragment() {
             FavoriteFragment.activity = activity
     }
 
-    //initialize visibility of Views after Fragment Created
-    private fun initVisibility() {
-    }
-
     private fun setup() {
         MainActivity.binding!!.bottomAppBar.menu.findItem(R.id.favorite).isChecked = true
     }
 
     private fun getAll() {
         Observable.fromCallable {
-            var db = AppDatabase.getDatabase(context = activity)
-            var favoriteDao = db?.favoriteDao()
-
-            with(favoriteDao) {
-                list = this!!.getAll()
-            }
-        }.doOnComplete { setFavorite() }
+            list = AppDatabase.getDatabase(context = activity)?.favoriteDao()!!.getAll()
+        }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe { setFavorite() }
+
     }
+
 
     private fun setFavorite() {
         binding?.leagues?.layoutManager = GridLayoutManager(activity, 2)
         binding?.leagues?.adapter =
             LeaguesAdapter(
                 requireActivity(),
-                list,
+                list, Constants.FAVORITE_FRAGMENT,
                 object : LeaguesAdapter.OnItemClickListener {
                     override fun leagueClick(position: Int) {
                         Navigator.loadFragment(
                             activity,
-                            LeagueDetailsFragment.newInstance(activity),
+                            LeagueDetailsFragment.newInstance(activity, list[position]),
                             R.id.fragment_container,
                             true
                         )
                     }
 
-                    override fun favoriteClick(position: Int,holder: LeaguesAdapter.MyViewHolder) {
+                    override fun favoriteClick(position: Int, holder: LeaguesAdapter.MyViewHolder) {
                     }
                 }
             )

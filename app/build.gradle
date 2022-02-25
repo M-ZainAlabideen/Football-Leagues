@@ -46,7 +46,6 @@ dependencies {
 
     //define versions
     def room_version = "2.2.0-rc01"
-    def glide_version = "4.13.0"
     def rounded_version = "2.3.0"
     def retrofit_version = "2.9.0"
 
@@ -61,6 +60,10 @@ dependencies {
     // glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //svg
+    implementation "io.coil-kt:coil:1.2.0"
+    implementation "io.coil-kt:coil-svg:1.2.0"
 
 
     // rounded ImageView
@@ -93,11 +96,5 @@ dependencies {
 
     //circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    //library for change the font of all the app
-    implementation 'io.github.inflationx:calligraphy3:3.1.1'
-    implementation 'io.github.inflationx:viewpump:2.0.3'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.cuneytayyildiz:gestureimageview:1.0.0'
 }
 

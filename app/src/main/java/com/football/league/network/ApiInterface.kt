@@ -7,8 +7,4 @@ import retrofit2.http.GET
 interface ApiInterface {
     @GET("competitions")
     fun leagues() : Observable<GetLeagues?>
-
-    @GET("{leagueId}/teams")
-    fun teams() : Observable<GetLeagues?>
-
 }
