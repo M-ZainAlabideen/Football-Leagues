@@ -14,13 +14,9 @@ import com.football.league.adapters.LeaguesAdapter
 import com.football.league.classes.GlobalFunctions
 import com.football.league.classes.Navigator
 import com.football.league.databinding.FragmentLeaguesBinding
-import com.football.league.database.room.AppDatabase
-import com.football.league.database.room.entities.Favorite
 import com.football.league.view_model.LeaguesViewModel
 import com.football.league.views.activities.MainActivity
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+
 
 class LeaguesFragment : Fragment() {
     private var binding: FragmentLeaguesBinding? = null
@@ -97,7 +93,7 @@ class LeaguesFragment : Fragment() {
             LeaguesAdapter(
                 requireActivity(),
                 list,null,
-                object : LeaguesAdapter.OnAllClickListener {
+                object : LeaguesAdapter.OnItemClickListener {
                     override fun leagueClick(position: Int) {
                         Navigator.loadFragment(
                             activity,
@@ -107,24 +103,8 @@ class LeaguesFragment : Fragment() {
                         )
                     }
 
-                    override fun favoriteClick(position: Int, holder: LeaguesAdapter.MyViewHolder) {
-                        addToFavorite(position, holder)
-                    }
                 }
             )
     }
 
-    fun addToFavorite(position: Int, holder: LeaguesAdapter.MyViewHolder) {
-        Observable.fromCallable {
-            AppDatabase.getDatabase(context = activity)?.favoriteDao()?.insert(
-                    Favorite(
-                        id = list[position]?.id,
-                        competition = list[position],
-                    )
-                )
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { holder.binding.favorite.setImageResource(R.drawable.star_sel) }
-    }
 }

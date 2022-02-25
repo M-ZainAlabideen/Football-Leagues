@@ -77,7 +77,7 @@ class FavoriteFragment : Fragment() {
             LeaguesAdapter(
                 requireActivity(),
                 list, Constants.FAVORITE_FRAGMENT,
-                object : LeaguesAdapter.OnLeagueClickListener {
+                object : LeaguesAdapter.OnItemClickListener {
                     override fun leagueClick(position: Int) {
                         Navigator.loadFragment(
                             activity,

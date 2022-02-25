@@ -9,7 +9,11 @@ import com.football.league.R
 import com.football.league.classes.Constants
 import com.football.league.classes.GlobalFunctions
 import com.football.league.databinding.ItemLeagueBinding
-
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import com.football.league.database.room.AppDatabase
+import com.football.league.database.room.entities.Favorite
 
 class LeaguesAdapter(
     private val context: Context,
@@ -56,7 +60,7 @@ class LeaguesAdapter(
         else
             holder.binding.plan.visibility = ViewGroup.INVISIBLE
 
-        itemCLick(holder, position)
+        clicks(holder, position)
     }
 
     private fun getName(position: Int): String? {
@@ -67,29 +71,33 @@ class LeaguesAdapter(
     }
 
 
-    private fun itemCLick(holder: MyViewHolder, position: Int) {
+    private fun clicks(holder: MyViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             listener.leagueClick(position)
         }
 
         holder.binding.favorite.setOnClickListener {
-            listener.favoriteClick(position, holder)
+            addToFavorite(position, holder)
         }
     }
 
+    private fun addToFavorite(position: Int, holder: MyViewHolder) {
+        Observable.fromCallable {
+            AppDatabase.getDatabase(context = context)?.favoriteDao()?.insert(
+                Favorite(
+                    id = list[position]?.id,
+                    competition = list[position],
+                )
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { holder.binding.favorite.setImageResource(R.drawable.star_sel) }
+    }
+
     interface OnItemClickListener {
-
-    }
-
-    interface OnLeagueClickListener : OnItemClickListener {
         fun leagueClick(position: Int)
     }
-
-    interface OnAllClickListener : OnItemClickListener {
-        fun favoriteClick(position: Int, holder: MyViewHolder)
-        fun leagueClick(position: Int)
-    }
-
 
     class MyViewHolder(itemView: ItemLeagueBinding) :
         RecyclerView.ViewHolder(itemView.root) {

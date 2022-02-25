@@ -6,7 +6,7 @@ import com.football.league.database.room.entities.Favorite
 
 @Dao
 interface FavoriteDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(favorite: Favorite)
 
     @Query("SELECT competition FROM favoriteLeagues")
