@@ -1,8 +1,8 @@
-package com.football.league.room.DAOs
+package com.football.league.database.room.DAOs
 
 import androidx.room.*
 import com.football.league.Model.responses.Competition
-import com.football.league.room.entities.Favorite
+import com.football.league.database.room.entities.Favorite
 
 @Dao
 interface FavoriteDao {

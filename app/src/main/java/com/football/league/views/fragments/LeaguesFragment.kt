@@ -14,8 +14,8 @@ import com.football.league.adapters.LeaguesAdapter
 import com.football.league.classes.GlobalFunctions
 import com.football.league.classes.Navigator
 import com.football.league.databinding.FragmentLeaguesBinding
-import com.football.league.room.AppDatabase
-import com.football.league.room.entities.Favorite
+import com.football.league.database.room.AppDatabase
+import com.football.league.database.room.entities.Favorite
 import com.football.league.view_model.LeaguesViewModel
 import com.football.league.views.activities.MainActivity
 import io.reactivex.Observable
@@ -56,7 +56,6 @@ class LeaguesFragment : Fragment() {
         checkData()
     }
 
-    //initialize activity
     private fun initActivity() {
         if (LeaguesFragment.activity == null)
             LeaguesFragment.activity = activity
@@ -88,8 +87,6 @@ class LeaguesFragment : Fragment() {
                 if (responseResult?.competitions != null && responseResult.competitions.isNotEmpty()) {
                     list.addAll(responseResult.competitions)
                     setLeagues()
-                } else {
-                    //if the api failed show the error message coming from server
                 }
             }
     }

@@ -1,4 +1,4 @@
-package com.football.league.room
+package com.football.league.database.room
 
 import androidx.room.TypeConverter
 import com.football.league.Model.responses.Competition

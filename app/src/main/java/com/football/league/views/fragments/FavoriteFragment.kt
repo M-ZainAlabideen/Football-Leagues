@@ -13,7 +13,7 @@ import com.football.league.adapters.LeaguesAdapter
 import com.football.league.classes.Constants
 import com.football.league.classes.Navigator
 import com.football.league.databinding.FragmentLeaguesBinding
-import com.football.league.room.AppDatabase
+import com.football.league.database.room.AppDatabase
 import com.football.league.views.activities.MainActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,7 +51,6 @@ class FavoriteFragment : Fragment() {
         getAll()
     }
 
-    //initialize activity
     private fun initActivity() {
         if (FavoriteFragment.activity == null)
             FavoriteFragment.activity = activity

@@ -1,4 +1,4 @@
-package com.football.league.room.entities
+package com.football.league.database.room.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

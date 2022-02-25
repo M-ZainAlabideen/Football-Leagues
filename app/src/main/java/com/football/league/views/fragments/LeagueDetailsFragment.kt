@@ -47,7 +47,6 @@ class LeagueDetailsFragment : Fragment() {
         setData()
     }
 
-    //initialize activity
     private fun initActivity() {
         if (LeagueDetailsFragment.activity == null)
             LeagueDetailsFragment.activity = activity

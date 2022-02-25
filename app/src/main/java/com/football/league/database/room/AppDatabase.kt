@@ -1,12 +1,12 @@
-package com.football.league.room
+package com.football.league.database.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.football.league.room.DAOs.FavoriteDao
-import com.football.league.room.entities.Favorite
+import com.football.league.database.room.DAOs.FavoriteDao
+import com.football.league.database.room.entities.Favorite
 
 @Database(entities = [Favorite::class], version = 1)
 @TypeConverters(Converters::class)

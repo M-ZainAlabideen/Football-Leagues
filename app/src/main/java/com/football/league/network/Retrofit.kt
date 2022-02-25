@@ -39,7 +39,7 @@ class Retrofit {
                     .build()
             }
             return retrofit!!.create(ApiInterface::class.java).also { apiInterface = it }
-        } // Retrofit Client Method
+        }
 
     }
 

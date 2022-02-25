@@ -1,9 +1,12 @@
 package com.football.league.repository
 
 import android.app.Application
+import android.provider.SyncStateContract
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.football.league.Model.responses.GetLeagues
+import com.football.league.classes.Constants
 import com.football.league.network.Retrofit
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,7 +40,7 @@ class LeaguesRepository(application: Application) {
     }
 
     private fun handleError(t: Throwable) {
-        //handle error
+        Log.d(Constants.PRINT,t.message.toString());
     }
 
 }
